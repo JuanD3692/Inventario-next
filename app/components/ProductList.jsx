@@ -126,7 +126,7 @@ const ProductList = ({
             alignItems: "center",
             flexDirection: { xs: "column", sm: "row" },
             gap: 2,
-            height: 64,
+            height: { xs: 150, md: 64 },
             backgroundColor: "rgba(255, 255, 255, 0.95)",
             py: 3,
             px: 3,
