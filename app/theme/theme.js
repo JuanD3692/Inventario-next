@@ -1,8 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-// Paleta de colores base
 const colors = {
-  // Colores principales
   primary: {
     main: "#4f46e5", // Indigo-600
     light: "#6366f1", // Indigo-500
@@ -238,7 +236,5 @@ const theme = createTheme({
     }),
 });
 
-// Exportación por defecto del tema
 export default theme;
-// Exportaciones adicionales de utilidades
 export { colors, gradients, shadows };

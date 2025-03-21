@@ -131,7 +131,6 @@ const ProductManager = () => {
         case "creacion":
           return multiplier * a.creacion.localeCompare(b.creacion);
         case "stock":
-          // Convertir a número para asegurar comparación numérica correcta
           const stockA = Number(a.cantidad) || 0;
           const stockB = Number(b.cantidad) || 0;
           return multiplier * (stockA - stockB);

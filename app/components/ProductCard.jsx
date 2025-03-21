@@ -8,7 +8,6 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 
-// Crear un componente Card con motion
 const MotionCard = motion.div;
 
 const ProductCard = ({ product, onDelete, onEdit, onCopy }) => {
@@ -35,14 +34,12 @@ const ProductCard = ({ product, onDelete, onEdit, onCopy }) => {
 
   const handleCopyClick = useCallback(
     (e) => {
-      e.stopPropagation(); // Evitar que se propague al card y active la edición
+      e.stopPropagation();
       onCopy(product);
-      // Podríamos añadir un mensaje de retroalimentación aquí si queremos
     },
     [product, onCopy]
   );
 
-  // Formatear fecha para mejor visualización
   const formattedDate = new Date(creacion).toLocaleDateString("es-ES", {
     day: "2-digit",
     month: "2-digit",
@@ -78,9 +75,9 @@ const ProductCard = ({ product, onDelete, onEdit, onCopy }) => {
           WebkitBackdropFilter: "blur(12px)",
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.05)",
           overflow: "hidden",
-          cursor: "pointer", // Añadir cursor pointer para indicar que es clickeable
+          cursor: "pointer",
         }}
-        onClick={handleCardClick} // Añadir el manejador de clic para editar
+        onClick={handleCardClick}
       >
         <motion.div
           initial={{ opacity: 0 }}

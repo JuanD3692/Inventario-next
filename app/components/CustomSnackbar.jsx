@@ -29,7 +29,6 @@ const snackbarIcons = {
   info: <InfoOutlinedIcon />,
 };
 
-// Barra de progreso que muestra el tiempo restante
 const TimerProgressBar = ({ duration, isRunning, onComplete }) => {
   const [progress, setProgress] = useState(100);
 
@@ -67,14 +66,13 @@ const TimerProgressBar = ({ duration, isRunning, onComplete }) => {
         right: 0,
         height: 2,
         "& .MuiLinearProgress-bar": {
-          transition: "none", // Desactivar la transición para actualización suave
+          transition: "none",
         },
       }}
     />
   );
 };
 
-// Componente principal del contenido del Snackbar
 const SnackbarContent = forwardRef(
   ({ message, type = "success", onClose, duration }, ref) => {
     const color = snackbarColors[type] || snackbarColors.success;
@@ -87,15 +85,14 @@ const SnackbarContent = forwardRef(
         sx={{
           display: "flex",
           width: "100%",
-          maxWidth: "384px", // Equivalente a max-w-96
-          height: "96px", // Altura fija
+          maxWidth: "384px",
+          height: "96px",
           borderRadius: "12px",
           overflow: "hidden",
           bgcolor: "white",
-          position: "relative", // Para la barra de progreso
+          position: "relative",
         }}
       >
-        {/* Decoración ondulada del lado izquierdo */}
         <Box
           sx={{
             width: "16px",
@@ -120,7 +117,6 @@ const SnackbarContent = forwardRef(
           }}
         />
 
-        {/* Contenido del mensaje */}
         <Box
           sx={{
             flex: 1,
@@ -159,7 +155,6 @@ const SnackbarContent = forwardRef(
           </Typography>
         </Box>
 
-        {/* Botón X para cerrar */}
         <Box
           sx={{
             width: "48px",
@@ -184,7 +179,6 @@ const SnackbarContent = forwardRef(
           </IconButton>
         </Box>
 
-        {/* Barra de progreso para temporizador */}
         <TimerProgressBar
           duration={duration}
           isRunning={true}
@@ -197,7 +191,6 @@ const SnackbarContent = forwardRef(
 
 SnackbarContent.displayName = "SnackbarContent";
 
-// Componente principal de Snackbar
 const CustomSnackbar = ({
   open,
   message,
@@ -205,7 +198,6 @@ const CustomSnackbar = ({
   autoHideDuration = 6000,
   onClose,
 }) => {
-  // Fix para el error de scrollTop
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.body.offsetHeight;
@@ -217,14 +209,14 @@ const CustomSnackbar = ({
       open={open}
       autoHideDuration={autoHideDuration}
       onClose={onClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }} // Cambiado a izquierda
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       sx={{
         "& .MuiSnackbar-root": { maxWidth: "100%" },
       }}
       TransitionComponent={TransitionComponent}
     >
       <motion.div
-        initial={{ opacity: 0, x: -100, scale: 0.9 }} // Animación desde la izquierda
+        initial={{ opacity: 0, x: -100, scale: 0.9 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         exit={{ opacity: 0, x: -100, scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -240,7 +232,6 @@ const CustomSnackbar = ({
   );
 };
 
-// Componente de transición simplificado para evitar el error
 const TransitionComponent = (props) => {
   const { children, in: inProp } = props;
   if (!inProp) return null;

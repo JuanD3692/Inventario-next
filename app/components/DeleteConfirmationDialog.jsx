@@ -44,7 +44,6 @@ const DeleteConfirmationDialog = ({
             transition: { duration: 0.3 },
           }}
         >
-          {/* Modal Content */}
           <DialogContent sx={{ px: 4, py: 4 }}>
             <motion.div
               initial={{ opacity: 0 }}
@@ -56,19 +55,18 @@ const DeleteConfirmationDialog = ({
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  justifyContent: "center", // Centrar verticalmente
+                  justifyContent: "center",
                   textAlign: "center",
                   gap: 3,
                 }}
               >
-                {/* Ícono con badge - sin animación para el icono trash */}
                 <Box
                   sx={{
                     position: "relative",
-                    width: 88, // Ancho fijo para asegurar centrado
-                    height: 88, // Alto fijo para asegurar centrado
-                    mx: "auto", // Centrar horizontalmente
-                    mb: 1, // Margen inferior para separación
+                    width: 88,
+                    height: 88,
+                    mx: "auto",
+                    mb: 1,
                   }}
                 >
                   <motion.div
@@ -92,7 +90,7 @@ const DeleteConfirmationDialog = ({
                         justifyContent: "center",
                         position: "absolute",
                         top: 0,
-                        left: 4, // Centrar respecto al contenedor padre
+                        left: 4,
                       }}
                     >
                       <ErrorOutlineIcon
@@ -104,17 +102,16 @@ const DeleteConfirmationDialog = ({
                     </Box>
                   </motion.div>
 
-                  {/* Ícono trash sin animación */}
                   <Box
                     sx={{
                       position: "absolute",
                       bottom: 4,
                       right: 0,
                       bgcolor: "error.main",
-                      borderRadius: "50%", // Círculo perfecto
-                      width: 28, // Ancho fijo
-                      height: 28, // Alto fijo igual al ancho
-                      display: "flex", // Para centrar el ícono dentro
+                      borderRadius: "50%",
+                      width: 28,
+                      height: 28,
+                      display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
@@ -128,7 +125,6 @@ const DeleteConfirmationDialog = ({
                   </Box>
                 </Box>
 
-                {/* Texto con animación */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -169,7 +165,6 @@ const DeleteConfirmationDialog = ({
             </motion.div>
           </DialogContent>
 
-          {/* Modal Footer con animación */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -182,7 +177,7 @@ const DeleteConfirmationDialog = ({
                 bgcolor: "grey.50",
                 display: "flex",
                 flexDirection: { xs: "column", sm: "row" },
-                justifyContent: "flex-end", // Alinear los botones a la derecha
+                justifyContent: "flex-end",
                 gap: 1.5,
               }}
             >

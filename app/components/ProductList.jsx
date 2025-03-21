@@ -26,21 +26,18 @@ const ProductList = ({
   onEditProduct,
   onCopyProduct,
 }) => {
-  // Estado para la paginación
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(6);
 
-  // Manejadores para cambios en la paginación
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(1); // Resetear a la primera página cuando cambia el número de elementos
+    setPage(1);
   };
 
-  // Variantes para animaciones de contenedor
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -51,17 +48,6 @@ const ProductList = ({
     },
   };
 
-  // Variantes para animaciones de elementos
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4 },
-    },
-  };
-
-  // Si no hay productos
   if (products.length === 0) {
     return (
       <MotionPaper
@@ -87,18 +73,14 @@ const ProductList = ({
       </MotionPaper>
     );
   }
-
-  // Calcular el rango de productos a mostrar basado en la paginación
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
 
-  // Calcular el número total de páginas
   const count = Math.ceil(products.length / rowsPerPage);
 
   return (
     <Box>
-      {/* Lista de Productos - Añadir animación de contenedor */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -126,7 +108,6 @@ const ProductList = ({
         </Grid>
       </motion.div>
 
-      {/* Controles de Paginación - Añadir animación */}
       {products.length > 0 && (
         <MotionContainer
           initial={{ opacity: 0, y: 20 }}
@@ -154,48 +135,55 @@ const ProductList = ({
             boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.05)",
           }}
         >
-          {/* Información de Paginación */}
-          <Typography variant="body2" color="text.secondary">
-            Mostrando {paginatedProducts.length} de {products.length} productos
-          </Typography>
-
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-            alignItems="center"
-          >
-            {/* Selector de Elementos por Página */}
-            <FormControl variant="outlined" size="small" sx={{ minWidth: 120 }}>
-              <InputLabel id="rows-per-page-label">Por página</InputLabel>
-              <Select
-                labelId="rows-per-page-label"
-                id="rows-per-page"
-                value={rowsPerPage}
-                onChange={handleChangeRowsPerPage}
-                label="Por página"
+          <Grid container spacing={4}>
+            <Grid item xs={8} sm={8}>
+              <Typography variant="body2" color="text.secondary">
+                Mostrando {paginatedProducts.length} de {products.length}{" "}
+                productos
+              </Typography>
+            </Grid>
+            <Grid item xs={2} sm={2}>
+              <FormControl
+                variant="outlined"
+                size="small"
+                sx={{ minWidth: 120 }}
               >
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={6}>6</MenuItem>
-                <MenuItem value={9}>9</MenuItem>
-                <MenuItem value={12}>12</MenuItem>
-              </Select>
-            </FormControl>
-
-            {/* Paginación */}
-            <Pagination
-              count={count}
-              page={page}
-              onChange={handleChangePage}
-              color="primary"
-              shape="rounded"
-              size="medium"
-              sx={{
-                "& .MuiPaginationItem-root": {
-                  fontSize: "0.875rem",
-                },
-              }}
-            />
-          </Stack>
+                <InputLabel id="rows-per-page-label">Por página</InputLabel>
+                <Select
+                  labelId="rows-per-page-label"
+                  id="rows-per-page"
+                  value={rowsPerPage}
+                  onChange={handleChangeRowsPerPage}
+                  label="Por página"
+                >
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={6}>6</MenuItem>
+                  <MenuItem value={9}>9</MenuItem>
+                  <MenuItem value={12}>12</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              sx={{ display: "flex", justifyContent: "center" }}
+              xs={12}
+              sm={2}
+            >
+              <Pagination
+                count={count}
+                page={page}
+                onChange={handleChangePage}
+                color="primary"
+                shape="rounded"
+                size="medium"
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    fontSize: "0.875rem",
+                  },
+                }}
+              />
+            </Grid>
+          </Grid>
         </MotionContainer>
       )}
     </Box>

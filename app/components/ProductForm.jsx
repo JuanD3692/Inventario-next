@@ -32,7 +32,6 @@ const ProductForm = ({
   onClose,
   mode = "add",
 }) => {
-  // Inicializar formData según el modo y si hay producto
   const [formData, setFormData] = useState(() => {
     if ((mode === "edit" || mode === "copy") && product) {
       return {
@@ -48,7 +47,6 @@ const ProductForm = ({
   const [charCount, setCharCount] = useState(0);
   const [charCountProgress, setCharCountProgress] = useState(0);
 
-  // Actualizar contador de caracteres cuando cambia la descripción
   useEffect(() => {
     setCharCount(formData.descripcion.length);
     setCharCountProgress(
@@ -60,12 +58,10 @@ const ProductForm = ({
     (e) => {
       const { name, value } = e.target;
 
-      // Si es el campo código, validar que solo sean dígitos
       if (name === "codigo" && value !== "" && !validator.isNumeric(value)) {
-        return; // No actualizar el estado si no es numérico
+        return;
       }
 
-      // Si es descripción, limitar a MAX_DESCRIPTION_LENGTH caracteres
       if (name === "descripcion" && value.length > MAX_DESCRIPTION_LENGTH) {
         setFormData((prev) => ({
           ...prev,
@@ -76,7 +72,6 @@ const ProductForm = ({
 
       setFormData((prev) => ({ ...prev, [name]: value }));
 
-      // Limpiar error cuando se modifica un campo
       if (errors[name]) {
         setErrors((prev) => ({ ...prev, [name]: "" }));
       }
@@ -119,7 +114,6 @@ const ProductForm = ({
       e.preventDefault();
 
       if (validateForm()) {
-        // Convertir a los tipos de datos correctos
         const productData = {
           codigo: Number(formData.codigo),
           nombre: formData.nombre,
@@ -134,7 +128,6 @@ const ProductForm = ({
             creacion: product.creacion,
           });
         } else {
-          // Para "add" y "copy", usamos onAddProduct
           onAddProduct(productData);
         }
 
@@ -161,7 +154,6 @@ const ProductForm = ({
       sx={{ width: "100%" }}
     >
       <Stack spacing={4}>
-        {/* Código del Producto */}
         <Box>
           <Typography
             variant="body2"
@@ -192,7 +184,7 @@ const ProductForm = ({
             size="small"
             inputProps={{
               inputMode: "numeric",
-              pattern: "[0-9]*", // Para teclados móviles mostrar teclado numérico
+              pattern: "[0-9]*",
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -207,7 +199,6 @@ const ProductForm = ({
           />
         </Box>
 
-        {/* Nombre del Producto */}
         <Box>
           <Typography
             variant="body2"
@@ -249,7 +240,6 @@ const ProductForm = ({
           />
         </Box>
 
-        {/* Descripción con contador de caracteres */}
         <Box>
           <Typography
             variant="body2"
@@ -325,7 +315,6 @@ const ProductForm = ({
           </Box>
         </Box>
 
-        {/* Cantidad en Stock */}
         <Box>
           <Typography
             variant="body2"
@@ -369,7 +358,6 @@ const ProductForm = ({
         </Box>
       </Stack>
 
-      {/* Footer con botones - Quitar las propiedades que causan problemas de scroll */}
       <Box
         sx={{
           display: "flex",
@@ -381,12 +369,12 @@ const ProductForm = ({
           bgcolor: "grey.50",
           borderTop: 1,
           borderColor: "grey.100",
-          borderRadius: 0, // Quitar border radius que causa problemas
+          borderRadius: 0,
         }}
       >
         <Button
           onClick={onClose}
-          type="button" // Asegurar que sea de tipo button para que no envíe el formulario
+          type="button"
           sx={{
             color: "text.secondary",
             fontWeight: 500,
